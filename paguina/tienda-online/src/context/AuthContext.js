@@ -28,7 +28,6 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('user');
   };
 
-  // ✅ DEFINIR el value que se va a proveer
   const value = {
     user,
     login,
