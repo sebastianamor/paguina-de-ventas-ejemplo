@@ -1,4 +1,3 @@
-// components/common/Sidebar.js
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -6,6 +5,11 @@ import { useAuth } from '../../context/AuthContext';
 function Sidebar() {
   const location = useLocation();
   const { user } = useAuth();
+
+  // Si no hay usuario, no mostrar sidebar
+  if (!user) {
+    return null;
+  }
 
   const menuItems = [
     { path: '/dashboard', label: 'Dashboard' },
@@ -28,16 +32,6 @@ function Sidebar() {
               </Link>
             </li>
           ))}
-          {user?.role === 'admin' && (
-            <li>
-              <Link 
-                to="/admin" 
-                className={location.pathname === '/admin' ? 'active' : ''}
-              >
-                Administración
-              </Link>
-            </li>
-          )}
         </ul>
       </nav>
     </aside>

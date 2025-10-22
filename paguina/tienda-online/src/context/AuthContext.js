@@ -1,4 +1,3 @@
-// context/AuthContext.js
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const AuthContext = createContext();
@@ -12,7 +11,6 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Verificar si hay usuario en localStorage al cargar
     const savedUser = localStorage.getItem('user');
     if (savedUser) {
       setUser(JSON.parse(savedUser));
@@ -30,6 +28,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('user');
   };
 
+  // ✅ DEFINIR el value que se va a proveer
   const value = {
     user,
     login,

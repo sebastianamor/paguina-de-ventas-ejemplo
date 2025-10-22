@@ -1,6 +1,6 @@
-// components/auth/Login.js
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -8,23 +8,30 @@ function Login() {
     password: ''
   });
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simular login
+    console.log('Intentando iniciar sesión con:', formData.email);
+    
+    // Simular login - CUALQUIER email y contraseña funciona
     const user = {
-      id: 1,
-      name: 'Usuario Demo',
+      id: Date.now(),
+      name: formData.email.includes('admin') ? 'Administrador' : 'Usuario',
       email: formData.email,
       role: formData.email.includes('admin') ? 'admin' : 'user'
     };
+    
+    console.log('Usuario creado:', user);
     login(user);
+    navigate('/dashboard'); // Redirige al dashboard
   };
 
   return (
     <div className="auth-container">
       <form onSubmit={handleSubmit} className="auth-form">
         <h2>Iniciar Sesión</h2>
+        
         <input
           type="email"
           placeholder="Email"
@@ -32,6 +39,7 @@ function Login() {
           onChange={(e) => setFormData({...formData, email: e.target.value})}
           required
         />
+        
         <input
           type="password"
           placeholder="Contraseña"
@@ -39,8 +47,17 @@ function Login() {
           onChange={(e) => setFormData({...formData, password: e.target.value})}
           required
         />
-        <button type="submit">Entrar</button>
-        <p>¿No tienes cuenta? <a href="/register">Regístrate</a></p>
+        
+        <button type="submit" className="login-btn">
+          Entrar
+        </button>
+        
+        <div className="login-tips">
+          <p><strong>Emails de prueba:</strong></p>
+          <p>• admin@test.com → Panel Administrador</p>
+          <p>• usuario@test.com → Panel Usuario</p>
+          <p><small>¡Cualquier contraseña funciona!</small></p>
+        </div>
       </form>
     </div>
   );
