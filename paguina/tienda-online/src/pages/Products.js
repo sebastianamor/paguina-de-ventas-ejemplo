@@ -2,6 +2,7 @@ import React, { useState } from 'react'; // ← Añadido useState aquí
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
+import './products.css'
 
 const Products = () => {
     const { user } = useAuth();

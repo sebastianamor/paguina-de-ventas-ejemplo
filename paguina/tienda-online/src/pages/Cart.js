@@ -2,6 +2,7 @@ import React from 'react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import './cart.css';
 
 function Cart() {
   const { cartItems, removeFromCart, updateQuantity, getCartTotal, clearCart } = useCart();

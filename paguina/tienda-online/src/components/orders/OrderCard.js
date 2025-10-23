@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './order-card.css';
 function OrderCard({ order }) {
   const getStatusColor = (status) => {
     switch (status) {
@@ -21,6 +21,7 @@ function OrderCard({ order }) {
 
   return (
     <div className="order-card">
+      <div className={`order-card ${order.status}`}>
       <div className="order-header">
         <h3>Pedido #{order.id}</h3>
         <span 
@@ -36,6 +37,7 @@ function OrderCard({ order }) {
         {order.amount && <p><strong>Monto:</strong> ${order.amount}</p>}
         {order.user && <p><strong>Usuario:</strong> {order.user}</p>}
       </div>
+    </div>
     </div>
   );
 }

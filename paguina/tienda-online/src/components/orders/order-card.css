@@ -1,0 +1,353 @@
+/* order-card.css - Estilos modernos para tarjetas de pedido */
+
+/* Animaciones */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes statusGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 15px currentColor;
+  }
+}
+
+/* Tarjeta de pedido principal */
+.order-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInUp 0.6s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.order-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.order-card:hover::before {
+  transform: scaleX(1);
+}
+
+.order-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Encabezado de la tarjeta */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.order-header h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0;
+  background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Badge de estado */
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: white;
+  animation: slideInLeft 0.6s ease-out 0.2s both;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  min-width: 100px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.status-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.status-badge:hover::before {
+  left: 100%;
+}
+
+/* Colores específicos para cada estado */
+.status-badge[style*="pending"],
+.status-badge[style*="#e67e22"] {
+  background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%) !important;
+  animation: statusGlow 2s infinite;
+}
+
+.status-badge[style*="completed"],
+.status-badge[style*="#27ae60"] {
+  background: linear-gradient(135deg, #68d391 0%, #48bb78 100%) !important;
+  animation: statusGlow 2s infinite;
+}
+
+.status-badge[style*="cancelled"],
+.status-badge[style*="#e74c3c"] {
+  background: linear-gradient(135deg, #fc8181 0%, #f56565 100%) !important;
+  animation: statusGlow 2s infinite;
+}
+
+/* Detalles del pedido */
+.order-details {
+  animation: slideInLeft 0.6s ease-out 0.3s both;
+}
+
+.order-details p {
+  margin: 0.8rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.order-details p:hover {
+  background: white;
+  transform: translateX(5px);
+  border-color: #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.order-details strong {
+  color: #2d3748;
+  font-weight: 600;
+  min-width: 80px;
+  font-size: 0.9rem;
+}
+
+.order-details span {
+  color: #4a5568;
+  font-weight: 500;
+  text-align: right;
+  flex: 1;
+  margin-left: 1rem;
+}
+
+/* Estilos específicos para montos */
+.order-details p:has(strong:contains("Monto")) span {
+  font-weight: 700;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  background-color: #f7fafc;
+}
+
+/* Estilos para fechas */
+.order-details p:has(strong:contains("Fecha")) span {
+  font-family: 'Courier New', monospace;
+  background: #f7fafc;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  font-size: 0.85rem;
+  color: #718096;
+}
+
+/* Efecto de partículas en el fondo de la tarjeta */
+.order-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(102, 126, 234, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(118, 75, 162, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.order-card:hover::after {
+  opacity: 1;
+}
+
+/* Iconos para diferentes tipos de información */
+.order-details p:has(strong:contains("Producto"))::before {
+  content: '📦';
+  margin-right: 0.5rem;
+}
+
+.order-details p:has(strong:contains("Fecha"))::before {
+  content: '📅';
+  margin-right: 0.5rem;
+}
+
+.order-details p:has(strong:contains("Monto"))::before {
+  content: '💰';
+  margin-right: 0.5rem;
+}
+
+.order-details p:has(strong:contains("Usuario"))::before {
+  content: '👤';
+  margin-right: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .order-card {
+    padding: 1.2rem;
+    margin: 0.5rem;
+  }
+  
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+  
+  .order-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  .status-badge {
+    align-self: flex-start;
+  }
+  
+  .order-details p {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+  
+  .order-details span {
+    text-align: left;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .order-card {
+    padding: 1rem;
+  }
+  
+  .order-header h3 {
+    font-size: 1.1rem;
+  }
+  
+  .status-badge {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.8rem;
+    min-width: 80px;
+  }
+  
+  .order-details p {
+    padding: 0.6rem;
+  }
+  
+  .order-details strong {
+    min-width: 60px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Efecto de carga skeleton */
+.order-card.loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Variantes de color basadas en el estado */
+.order-card.pending {
+  border-left: 4px solid #ed8936;
+}
+
+.order-card.completed {
+  border-left: 4px solid #48bb78;
+}
+
+.order-card.cancelled {
+  border-left: 4px solid #f56565;
+}
+
+/* Mejora de accesibilidad */
+.order-card:focus-within {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+.status-badge:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}

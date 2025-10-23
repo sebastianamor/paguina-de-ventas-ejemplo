@@ -26,6 +26,23 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  // 🔄 Actualizar cantidad de un producto
+  const updateQuantity = (productId, newQuantity) => {
+    setCartItems((prevItems) => {
+      // Si la cantidad es 0 o menor, elimina el producto
+      if (newQuantity <= 0) {
+        return prevItems.filter((item) => item.id !== productId);
+      }
+      
+      // Actualiza la cantidad del producto
+      return prevItems.map((item) =>
+        item.id === productId
+          ? { ...item, quantity: newQuantity }
+          : item
+      );
+    });
+  };
+
   // ➖ Eliminar producto del carrito
   const removeFromCart = (productId) => {
     setCartItems((prevItems) =>
@@ -51,6 +68,7 @@ export const CartProvider = ({ children }) => {
       value={{
         cartItems,
         addToCart,
+        updateQuantity, // ← AÑADIR ESTA LÍNEA
         removeFromCart,
         clearCart,
         getCartItemsCount,
