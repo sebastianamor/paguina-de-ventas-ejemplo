@@ -1,4 +1,4 @@
-/* === RESET GENERAL === */
+
 * {
   margin: 0;
   padding: 0;
@@ -194,37 +194,8 @@ html, body {
   transform: scale(1.05);
 }
 
-/* === FOOTER === */
-.footer {
-  background: linear-gradient(135deg, #1d4ed8, #2563eb);
-  color: white;
-  padding: 30px 20px;
-  font-size: 0.9rem;
-  text-align: center;
-}
 
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: left;
-}
 
-.footer-section {
-  flex: 1;
-  min-width: 200px;
-}
-
-.footer-bottom {
-  margin-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
-  padding-top: 10px;
-  font-size: 0.8rem;
-  text-align: center;
-}
 
 /* === RESPONSIVE === */
 @media (max-width: 900px) {
@@ -249,16 +220,4 @@ html, body {
   .products-grid {
     grid-template-columns: 1fr;
   }
-}
-
-.footer {
-  all: unset;
-  display: block;
-  background: linear-gradient(135deg, #1d4ed8, #2563eb);
-  color: white;
-  padding: 30px 40px;
-  text-align: center;
-  font-size: 0.9rem;
-  width: 100%;
-  margin-top: auto;
 }

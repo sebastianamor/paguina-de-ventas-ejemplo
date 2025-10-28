@@ -1,55 +1,53 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "./footer.css";
+import { Facebook, Instagram, Twitter, Mail } from "lucide-react";
+import "./Footer.css";
 
 function Footer() {
   return (
     <footer className="footer">
       <div className="footer-content">
-
-        {/* 🔹 Sección 1: Marca y descripción */}
+        {/* === Sección 1: Nombre del sitio === */}
         <div className="footer-section">
-          <h2 className="footer-title">🛒 Tienda Online</h2>
-          <p className="footer-description">
-            Tu tienda de confianza. Productos de calidad, atención personalizada y entregas rápidas.
+          <h3>🛒 Tienda Online</h3>
+          <p>
+            Tu mejor lugar para comprar productos de calidad al mejor precio.
           </p>
         </div>
 
-        {/* 🔹 Sección 2: Enlaces rápidos */}
+        {/* === Sección 2: Enlaces útiles === */}
         <div className="footer-section">
-          <h3>Enlaces útiles</h3>
+          <h4>Enlaces útiles</h4>
           <ul>
-            <li><Link to="/products">Productos</Link></li>
-            <li><Link to="/quienes-somos">Quiénes Somos</Link></li>
-            <li><Link to="/cart">Carrito</Link></li>
-            <li><Link to="/profile">Mi Perfil</Link></li>
+            <li><a href="/about">Sobre nosotros</a></li>
+            <li><a href="/contact">Contacto</a></li>
+            <li><a href="/privacy">Política de Privacidad</a></li>
+            <li><a href="/terms">Términos y Condiciones</a></li>
           </ul>
         </div>
 
-        {/* 🔹 Sección 3: Contacto */}
-        <div className="footer-section">
-          <h3>Contáctanos</h3>
-          <p>📞 +81 080-1234-5678</p>
-          <p>✉️ soporte@tiendaonline.com</p>
-          <p>📍 Tokio, Japón</p>
-        </div>
-
-        {/* 🔹 Sección 4: Redes Sociales */}
-        <div className="footer-section">
-          <h3>Síguenos</h3>
+        {/* === Sección 3: Redes sociales === */}
+        <div className="footer-section redes">
+          <h4>Síguenos</h4>
           <div className="social-icons">
-            <a href="#"><i className="fab fa-facebook-f"></i></a>
-            <a href="#"><i className="fab fa-instagram"></i></a>
-            <a href="#"><i className="fab fa-twitter"></i></a>
-            <a href="#"><i className="fab fa-tiktok"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+              <Facebook size={22} />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+              <Instagram size={22} />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+              <Twitter size={22} />
+            </a>
+            <a href="mailto:contacto@tienda.com">
+              <Mail size={22} />
+            </a>
           </div>
         </div>
-
       </div>
 
-      {/* Línea inferior */}
+      {/* === Línea inferior === */}
       <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} Tienda Online — Todos los derechos reservados</p>
+        © {new Date().getFullYear()} Tienda Online. Todos los derechos reservados.
       </div>
     </footer>
   );

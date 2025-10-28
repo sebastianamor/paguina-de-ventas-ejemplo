@@ -29,7 +29,7 @@ function ProtectedRoute({ children }) {
   return user ? children : <Navigate to="/login" />;
 }
 
-// === LAYOUT PRINCIPAL ===
+ // === LAYOUT PRINCIPAL ===
 function AppLayout() {
   return (
     <div className="app">
@@ -39,11 +39,12 @@ function AppLayout() {
         <main className="main-content">
           <Outlet /> {/* Aquí se renderizan las páginas hijas */}
         </main>
-        <Footer />
       </div>
+      <Footer /> {/* 👈 Lo movemos AQUÍ, fuera del body */}
     </div>
   );
 }
+
 
 // === CONTENIDO PRINCIPAL ===
 function AppContent() {
