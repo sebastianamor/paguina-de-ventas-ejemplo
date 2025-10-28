@@ -1,3 +1,5 @@
+import React from "react";
+import "./about.css";  // ← Agrega el ./
 export default function About() {
   return (
     <div className="about-page">

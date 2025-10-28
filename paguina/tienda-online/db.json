@@ -1,0 +1,128 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Smartphone Samsung Galaxy S23 Ultra",
+      "price": 1199.99,
+      "image": "https://s01.riotpixels.net/data/43/fc/43fc0667-3075-49cb-9137-c00389b9a816.jpg/screenshot.zephon.1920x1080.2024-11-10.13.jpg",
+      "description": "El smartphone definitivo para creadores de contenido y profesionales. Con cámara de 200MP y procesador Snapdragon 8 Gen 2.",
+      "category": "smartphones",
+      "features": ["Cámara 200MP", "Pantalla 6.8''", "S Pen integrado", "512GB almacenamiento"],
+      "specifications": {
+        "pantalla": "6.8'' Dynamic AMOLED 2X",
+        "procesador": "Snapdragon 8 Gen 2",
+        "ram": "12GB",
+        "almacenamiento": "512GB",
+        "camara": "200MP + 12MP + 10MP + 10MP",
+        "bateria": "5000mAh"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Laptop HP Pavilion 15",
+      "price": 849.99,
+      "image": "https://via.placeholder.com/600x600/28a745/ffffff?text=HP+Pavilion+15",
+      "description": "Laptop versátil para trabajo y entretenimiento con procesador Intel Core i7 y pantalla Full HD.",
+      "category": "laptops",
+      "features": ["Intel Core i7", "16GB RAM", "512GB SSD", "NVIDIA GTX 1650"],
+      "specifications": {
+        "pantalla": "15.6'' Full HD IPS",
+        "procesador": "Intel Core i7-1255U",
+        "ram": "16GB DDR4",
+        "almacenamiento": "512GB SSD",
+        "graficos": "NVIDIA GeForce GTX 1650",
+        "bateria": "52.5Wh"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Auriculares Sony WH-1000XM4",
+      "price": 299.99,
+      "image": "https://via.placeholder.com/600x600/dc3545/ffffff?text=Sony+WH-1000XM4",
+      "description": "Auriculares con cancelación de ruido líder en el mercado y sonido de alta fidelidad.",
+      "category": "audio",
+      "features": ["Cancelación de ruido", "30h batería", "Touch controls", "Asistente de voz"],
+      "specifications": {
+        "tipo": "Over-ear inalámbricos",
+        "bateria": "30 horas",
+        "conectividad": "Bluetooth 5.0",
+        "peso": "254g",
+        "cancelacion": "Noise Canceling Pro"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Smartwatch Apple Watch Series 8",
+      "price": 399.99,
+      "image": "https://via.placeholder.com/600x600/6f42c1/ffffff?text=Apple+Watch+8",
+      "description": "Reloj inteligente para monitorear tu salud, actividad física y mantenerte conectado.",
+      "category": "wearables",
+      "features": ["Monitoreo salud", "GPS", "Resistente agua", "iOS compatible"],
+      "specifications": {
+        "pantalla": "Always-On Retina",
+        "bateria": "18 horas",
+        "resistencia": "50m agua",
+        "conectividad": "WiFi + Cellular",
+        "sensores": "ECG, Oxímetro"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Tablet iPad Air 5ta Gen",
+      "price": 599.99,
+      "image": "https://via.placeholder.com/600x600/fd7e14/ffffff?text=iPad+Air+5",
+      "description": "Tablet versátil para creativos y estudiantes con chip M1 y compatibilidad con Apple Pencil.",
+      "category": "tablets",
+      "features": ["Chip M1", "Compatibilidad Apple Pencil", "10.9'' Liquid Retina", "5G"],
+      "specifications": {
+        "pantalla": "10.9'' Liquid Retina",
+        "procesador": "Apple M1",
+        "almacenamiento": "64GB/256GB",
+        "camara": "12MP Ultra Wide",
+        "conectividad": "WiFi 6 + 5G"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Cámara Canon EOS R5",
+      "price": 1299.99,
+      "image": "https://via.placeholder.com/600x600/20c997/ffffff?text=Canon+EOS+R5",
+      "description": "Cámara mirrorless profesional con grabación 8K y estabilización avanzada.",
+      "category": "fotografia",
+      "features": ["Video 8K", "Estabilización 8-stops", "45MP full-frame", "Dual Pixel CMOS AF"],
+      "specifications": {
+        "sensor": "45MP Full-Frame",
+        "video": "8K 30fps",
+        "estabilizacion": "IBIS 8 stops",
+        "enfoque": "Dual Pixel CMOS AF II",
+        "conectividad": "WiFi + Bluetooth"
+      }
+    }
+
+     ,
+    {
+      "id": 7,
+      "name": "Cámara Canon EOS R5",
+      "price": 1299.99,
+      "image": "https://via.placeholder.com/600x600/20c997/ffffff?text=Canon+EOS+R5",
+      "description": "Cámara mirrorless profesional con grabación 8K y estabilización avanzada.",
+      "category": "fotografia",
+      "features": ["Video 8K", "Estabilización 8-stops", "45MP full-frame", "Dual Pixel CMOS AF"],
+      "specifications": {
+        "sensor": "45MP Full-Frame",
+        "video": "8K 30fps",
+        "estabilizacion": "IBIS 8 stops",
+        "enfoque": "Dual Pixel CMOS AF II",
+        "conectividad": "WiFi + Bluetooth"
+      }
+    }
+     
+
+
+
+
+
+
+
+  ]
+}

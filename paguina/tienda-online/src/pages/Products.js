@@ -1,85 +1,94 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./products.css";
+import { useCart } from "../context/CartContext";
+import { Link } from "react-router-dom";
+import "./products.css"; // Asegúrate que el nombre coincida con tu archivo
 
 function Products() {
   const [products, setProducts] = useState([]);
-  const [filtered, setFiltered] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { addToCart } = useCart();
 
-  // 🔍 Para leer el término de búsqueda desde la URL
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const search = queryParams.get("search") || "";
-  const category = queryParams.get("cat") || "";
-
-  // 🧠 Cargar los productos desde el backend
+  // 🧠 Obtener productos desde JSON Server
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/products");
+        const res = await axios.get("http://localhost:3000/products");
         setProducts(res.data);
         setLoading(false);
       } catch (err) {
         console.error("Error cargando productos:", err);
+        setError("Error al cargar los productos");
         setLoading(false);
       }
     };
+    
     fetchProducts();
   }, []);
 
-  // 🔎 Filtrar productos cuando cambia "search" o "category"
-  useEffect(() => {
-    let filteredList = products;
-
-    if (category) {
-      filteredList = filteredList.filter(
-        (p) =>
-          p.category?.toLowerCase() === category.toLowerCase()
-      );
-    }
-
-    if (search) {
-      filteredList = filteredList.filter((p) =>
-        p.name.toLowerCase().includes(search.toLowerCase())
-      );
-    }
-
-    setFiltered(filteredList);
-  }, [search, category, products]);
+  const handleAddToCart = (product) => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      description: product.description,
+      quantity: 1
+    });
+    
+    alert(`✅ ${product.name} añadido al carrito`);
+  };
 
   if (loading) {
-    return <div className="loading">Cargando productos...</div>;
+    return (
+      <div className="products-loading">
+        <h2>Cargando productos...</h2>
+        <div className="loading-spinner"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="products-error">
+        <h2>Error</h2>
+        <p>{error}</p>
+        <button onClick={() => window.location.reload()} className="retry-btn">
+          Reintentar
+        </button>
+      </div>
+    );
   }
 
   return (
     <div className="products-page">
-      <h2 className="title">
-        {category
-          ? `Categoría: ${category}`
-          : search
-          ? `Resultados para "${search}"`
-          : "Todos los Productos"}
-      </h2>
-
-      <div className="product-grid">
-        {filtered.length > 0 ? (
-          filtered.map((product) => (
-            <div key={product._id} className="product-card">
-              <img
-                src={product.image || "https://via.placeholder.com/150"}
+      <h1>Nuestros Productos</h1>
+      <div className="products-grid">
+        {products.map(product => (
+          <div key={product.id} className="product-card">
+            <Link to={`/product/${product.id}`} className="product-link">
+              <img 
+                src={product.image} 
                 alt={product.name}
+                className="product-image"
               />
-              <h3>{product.name}</h3>
-              <p className="description">{product.description}</p>
-              <p className="price">${product.price}</p>
-              <button className="buy-btn">Agregar al carrito 🛒</button>
+            </Link>
+            <div className="product-info">
+              <h3 className="product-name">{product.name}</h3>
+              <p className="product-description">
+                {product.description || "Producto de alta calidad con garantía."}
+              </p>
+              <div className="product-price">${product.price}</div>
+              <button 
+                className="add-to-cart-btn"
+                onClick={() => handleAddToCart(product)}
+              >
+                🛒 Añadir al Carrito
+              </button>
             </div>
-          ))
-        ) : (
-          <p>No se encontraron productos.</p>
-        )}
+          </div>
+        ))}
       </div>
     </div>
   );
