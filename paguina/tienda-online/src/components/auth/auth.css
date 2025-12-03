@@ -80,7 +80,6 @@
 /* Formulario de autenticación */
 .auth-form {
   background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
   padding: 3rem;
   border-radius: 20px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
@@ -137,7 +136,6 @@
   font-size: 1rem;
   transition: all 0.3s ease;
   background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
 }
 
 .auth-form input:focus {

@@ -116,9 +116,20 @@
         "conectividad": "WiFi + Bluetooth"
       }
     }
-     
+   ,  
 
-
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Producto Ejemplo",
+      "price": 99.99,
+      "image": "https://via.placeholder.com/600",
+      "description": "Descripción del producto",
+      "category": "electronics"
+    }
+  ]
+}
 
 
 

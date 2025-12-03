@@ -11,12 +11,20 @@ export default function ProductDetail() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
+  const [error, setError] = useState(null);
 
-  // 🧠 Obtener producto desde JSON Server con fallback
   useEffect(() => {
     const fetchProduct = async () => {
       try {
+        setLoading(true);
+        setError(null);
         console.log("🔄 Cargando producto ID:", id);
+        
+        // Verifica que la ID sea válida
+        if (!id || isNaN(id)) {
+          throw new Error("ID de producto inválido");
+        }
+        
         const res = await axios.get(`http://localhost:3000/products/${id}`);
         
         if (res.data) {
@@ -24,7 +32,6 @@ export default function ProductDetail() {
           setProduct(res.data);
         } else {
           console.log("❌ Producto no encontrado en API, usando fallback");
-          // Fallback con datos básicos
           setProduct({
             id: id,
             name: `Producto ${id}`,
@@ -34,9 +41,10 @@ export default function ProductDetail() {
             category: "general"
           });
         }
-        setLoading(false);
       } catch (err) {
-        console.error("❌ Error API, usando fallback:", err);
+        console.error("❌ Error al cargar producto:", err);
+        setError(err.message);
+        
         // Fallback si la API falla
         setProduct({
           id: id,
@@ -46,9 +54,11 @@ export default function ProductDetail() {
           description: `Descripción del producto ${id}. Producto de alta calidad con garantía.`,
           category: "general"
         });
+      } finally {
         setLoading(false);
       }
     };
+    
     fetchProduct();
   }, [id]);
 
@@ -89,6 +99,23 @@ export default function ProductDetail() {
     );
   }
 
+  if (error && !product) {
+    return (
+      <div className="error-container">
+        <h2>Error al cargar el producto</h2>
+        <p>{error}</p>
+        <div className="button-group">
+          <button onClick={() => navigate("/products")} className="btn-primary">
+            Volver a Productos
+          </button>
+          <button onClick={() => window.location.reload()} className="btn-secondary">
+            Reintentar
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (!product) {
     return (
       <div className="error-container">
@@ -102,7 +129,6 @@ export default function ProductDetail() {
   }
 
   return (
-      
     <div className="product-detail">
       <nav className="breadcrumb">
         <span onClick={() => navigate("/")}>Inicio</span> &gt; 
@@ -196,22 +222,21 @@ export default function ProductDetail() {
           <div className="spec-item">
             <span className="spec-label">Garantía:</span>
             <span className="spec-value">12 meses</span>
-
-
-             // Agrega estos botones en tu product-detail
-<div className="product-navigation">
-  <button onClick={() => navigate(`/product/${parseInt(id) - 1}`)} disabled={id <= 1}>
-    ← Producto Anterior
-  </button>
-  <button onClick={() => navigate(`/product/${parseInt(id) + 1}`)}>
-    Siguiente Producto →
-  </button>
-</div>
-
-
-
           </div>
         </div>
+      </div>
+
+      {/* Navegación entre productos */}
+      <div className="product-navigation">
+        <button 
+          onClick={() => navigate(`/product/${parseInt(id) - 1}`)} 
+          disabled={parseInt(id) <= 1}
+        >
+          ← Producto Anterior
+        </button>
+        <button onClick={() => navigate(`/product/${parseInt(id) + 1}`)}>
+          Siguiente Producto →
+        </button>
       </div>
     </div>
   );
