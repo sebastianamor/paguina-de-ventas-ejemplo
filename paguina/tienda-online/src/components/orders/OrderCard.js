@@ -1,6 +1,9 @@
 import React from 'react';
 import './order-card.css';
+
 function OrderCard({ order }) {
+  if (!order) return null;
+
   const getStatusColor = (status) => {
     switch (status) {
       case 'pending': return '#e67e22';
@@ -22,22 +25,23 @@ function OrderCard({ order }) {
   return (
     <div className="order-card">
       <div className={`order-card ${order.status}`}>
-      <div className="order-header">
-        <h3>Pedido #{order.id}</h3>
-        <span 
-          className="status-badge"
-          style={{ backgroundColor: getStatusColor(order.status) }}
-        >
-          {getStatusText(order.status)}
-        </span>
+        <div className="order-header">
+          <h3>Pedido #{order.id}</h3>
+          <span
+            className="status-badge"
+            style={{ backgroundColor: getStatusColor(order.status) }}
+          >
+            {getStatusText(order.status)}
+          </span>
+        </div>
+
+        <div className="order-details">
+          <p><strong>Producto:</strong> {order.product}</p>
+          <p><strong>Fecha:</strong> {order.date}</p>
+          {order.amount && <p><strong>Monto:</strong> ${order.amount}</p>}
+          {order.user && <p><strong>Usuario:</strong> {order.user}</p>}
+        </div>
       </div>
-      <div className="order-details">
-        <p><strong>Producto:</strong> {order.product}</p>
-        <p><strong>Fecha:</strong> {order.date}</p>
-        {order.amount && <p><strong>Monto:</strong> ${order.amount}</p>}
-        {order.user && <p><strong>Usuario:</strong> {order.user}</p>}
-      </div>
-    </div>
     </div>
   );
 }
