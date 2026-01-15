@@ -1,22 +1,24 @@
-import React from 'react';
-import './product-card.css';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import ProductCard from '../components/products/ProductCard';
+import './products.css';
 
-function ProductCard({ product }) {
-  if (!product) return null;
+const Products = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/products') // ejemplo
+      .then(res => setProducts(res.data))
+      .catch(err => console.error(err));
+  }, []);
 
   return (
-    <div className="product-card">
-      <img src={product.image} alt={product.name} />
-
-      <h3>{product.name}</h3>
-      <p>{product.description}</p>
-
-      <div className="product-footer">
-        <span className="price">${product.price}</span>
-        <button>Comprar</button>
-      </div>
+    <div className="products-grid">
+      {products.map(product => (
+        <ProductCard key={product.id} product={product} />
+      ))}
     </div>
   );
-}
+};
 
-export default ProductCard;
+export default Products;
