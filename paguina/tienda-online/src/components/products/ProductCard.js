@@ -1,5 +1,6 @@
 import React from 'react';
-import './product-card.css';
+import Productscar from '../../pages/Products';
+import './productcard.css';
 
 function ProductCard({ product }) {
   return (

@@ -7,13 +7,9 @@ const Products = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/products') // AJUSTA ESTA URL
-      .then(res => {
-        setProducts(res.data);
-      })
-      .catch(err => {
-        console.error('Error cargando productos:', err);
-      });
+    axios.get('http://localhost:3001/products')
+      .then(res => setProducts(res.data))
+      .catch(err => console.error('Error cargando productos:', err));
   }, []);
 
   return (
@@ -23,14 +19,15 @@ const Products = () => {
       {products.length === 0 ? (
         <p>No hay productos</p>
       ) : (
-        products.map(product => (
-          <ProductCard key={product.id} product={product} />
-        ))
+        <div className="products-grid">
+          {products.map(product => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
       )}
     </div>
   );
 };
 
 export default Products;
-
 
