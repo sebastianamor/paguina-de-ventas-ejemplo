@@ -6,68 +6,85 @@ import {
   Navigate,
   Outlet,
 } from "react-router-dom";
+
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
+
 import Header from "./components/common/Header";
 import Sidebar from "./components/common/Sidebar";
+import Footer from "./components/common/Footer";
+
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+
 import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import Products from "./pages/Products";
-import ProductDetail from "./pages/ProductDetail"; // 🆕 Página individual del producto
+import ProductDetail from "./pages/ProductDetail";
 import Orders from "./pages/Orders";
 import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
-import About from "./pages/About"; // 🆕 Página "Quiénes Somos"
-import Footer from "./components/common/Footer";
+import About from "./pages/About";
+
 import "./App.css";
 
-// === RUTA PROTEGIDA ===
+/* =====================
+   RUTA PROTEGIDA
+===================== */
 function ProtectedRoute({ children }) {
   const { user } = useAuth();
   return user ? children : <Navigate to="/login" />;
 }
 
- // === LAYOUT PRINCIPAL ===
+/* =====================
+   LAYOUT PRINCIPAL
+===================== */
 function AppLayout() {
   return (
     <div className="app">
-      <Header /> {/* 🔍 Contiene la búsqueda y categorías */}
+      <Header />
+
       <div className="app-body">
         <Sidebar />
+
         <main className="main-content">
-          <Outlet /> {/* Aquí se renderizan las páginas hijas */}
+          <Outlet />
         </main>
       </div>
-      <Footer /> {/* 👈 Lo movemos AQUÍ, fuera del body */}
+
+      <Footer />
     </div>
   );
 }
 
-
-// === CONTENIDO PRINCIPAL ===
+/* =====================
+   CONTENIDO PRINCIPAL
+===================== */
 function AppContent() {
   const { user, loading } = useAuth();
 
-  if (loading) return <div className="loading">Cargando...</div>;
+  if (loading) {
+    return <div className="loading">Cargando...</div>;
+  }
 
   return (
     <Router>
       <Routes>
-        {/* === RUTAS PÚBLICAS SIN LAYOUT === */}
+
+        {/* ===== RUTAS PÚBLICAS SIN LAYOUT ===== */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* === RUTAS CON LAYOUT === */}
+        {/* ===== RUTAS CON LAYOUT ===== */}
         <Route element={<AppLayout />}>
-          {/* === RUTAS PÚBLICAS === */}
-          <Route path="/products" element={<Products />} />
-          <Route path="/product/:id" element={<ProductDetail />} /> {/* 🆕 */}
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/about" element={<About />} /> {/* 🆕 */}
 
-          {/* === RUTAS PROTEGIDAS === */}
+          {/* Públicas */}
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/about" element={<About />} />
+
+          {/* Protegidas */}
           <Route
             path="/dashboard"
             element={
@@ -80,6 +97,7 @@ function AppContent() {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/orders"
             element={
@@ -88,6 +106,7 @@ function AppContent() {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/profile"
             element={
@@ -97,18 +116,21 @@ function AppContent() {
             }
           />
 
-          {/* === RUTA POR DEFECTO === */}
+          {/* Ruta por defecto */}
           <Route path="/" element={<Navigate to="/products" />} />
         </Route>
 
-        {/* === RUTA NO ENCONTRADA === */}
+        {/* No encontrada */}
         <Route path="*" element={<Navigate to="/products" />} />
+
       </Routes>
     </Router>
   );
 }
 
-// === APP PRINCIPAL ===
+/* =====================
+   APP PRINCIPAL
+===================== */
 function App() {
   return (
     <AuthProvider>
