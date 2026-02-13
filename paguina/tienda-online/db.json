@@ -23,6 +23,14 @@
       "image": "https://via.placeholder.com/600x600/dc3545/ffffff?text=Sony+WH-1000XM4",
       "description": "Cancelación de ruido líder.",
       "category": "audio"
+    },
+    {
+      "id": 4,
+      "name": "video juegos ",
+      "price": 200.99,
+      "image": "https://via.placeholder.com/600x600/dc3545/ffffff?text=Sony+WH-1000XM4",
+      "description": "juego psx para consolas modernas.",
+      "category": "videojuegos"
     }
   ]
 }

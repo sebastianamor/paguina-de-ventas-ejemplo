@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useCart } from '../../context/CartContext'; // ← IMPORTAR useCart
 import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
 
 function Header() {
   const { user, logout } = useAuth();
+  const { getItemCount } = useCart(); // ← OBTENER cantidad de items
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
+
+  const cartCount = getItemCount(); // ← Calcular cantidad
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (search.trim()) {
-      // Redirige a la página de productos con el término de búsqueda
       navigate(`/products?search=${encodeURIComponent(search)}`);
       setSearch('');
     }
@@ -40,13 +43,23 @@ function Header() {
         <div className="user-info">
           {user ? (
             <>
-              <Link to="/cart" className="cart-link">🛒 Carrito</Link>
+              <Link to="/cart" className="cart-link">
+                🛒 Carrito
+                {cartCount > 0 && ( // ← MOSTRAR BADGE solo si hay items
+                  <span className="cart-badge">{cartCount}</span>
+                )}
+              </Link>
               <span className="user-name">Hola, {user?.name}</span>
               <button onClick={logout} className="logout-btn">Cerrar Sesión</button>
             </>
           ) : (
             <div className="auth-links">
-              <Link to="/cart" className="cart-link">🛒 Carrito</Link>
+              <Link to="/cart" className="cart-link">
+                🛒 Carrito
+                {cartCount > 0 && ( // ← MOSTRAR BADGE también para no logueados
+                  <span className="cart-badge">{cartCount}</span>
+                )}
+              </Link>
               <Link to="/login" className="auth-link">Iniciar Sesión</Link>
               <Link to="/register" className="auth-link">Registrarse</Link>
             </div>

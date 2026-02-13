@@ -1,3 +1,111 @@
+
+/* ANIMACIÓN MEJORADA DEL BADGE */
+@keyframes badge-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes badge-pop {
+  0% {
+    transform: scale(0) rotate(0deg);
+  }
+  60% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #e74c3c;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  animation: badge-pop 0.5s ease;
+}
+
+/* Efecto de pulso continuo cuando hay items */
+.cart-badge:not(:empty) {
+  animation: badge-pulse 2s ease infinite;
+}
+
+
+
+/* BADGE DEL CARRITO */
+.cart-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  text-decoration: none;
+  color: inherit;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s;
+}
+
+.cart-link:hover {
+  color: #3498db;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #e74c3c;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  animation: badge-pulse 0.3s ease;
+}
+
+@keyframes badge-pulse {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Si el número es mayor a 9, ajustar forma */
+.cart-badge {
+  border-radius: 10px;
+  min-width: 20px;
+}
+
+
+
+
 /* ===== HEADER PRINCIPAL ===== */
 .header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
